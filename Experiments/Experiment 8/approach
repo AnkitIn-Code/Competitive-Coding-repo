@@ -1,0 +1,33 @@
+We solve this problem using Dynamic Programming (DP) by considering partitions of size at most k.
+
+At each index, we try forming a partition of length from 1 to k. For every partition:
+
+Find the maximum element in that subarray
+Replace all elements in the partition with this maximum
+Add the contribution:
+max_element × partition_length
+
+Let dp[i] represent the maximum sum achievable starting from index i.
+
+
+For each index i, we try all partition sizes:
+
+dp[i] = max(max(arr[i...i+len-1]) * len + dp[i+len])
+
+Where:
+
+len ranges from 1 to k
+i + len <= n
+dp[n] = 0
+
+When we reach the end of the array, no further contribution is possible.
+
+⏱️ Complexity
+Time Complexity: O(n × k)
+Space Complexity: O(n)
+
+Instead of trying all possible splits (which is inefficient), we:
+
+Limit partition size to k
+Use DP to reuse computed results
+Build the solution by making the best local choice at each index
